@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://p0amdcb7lslu"]
+
+[ext_resource type="Script" path="res://scripts/box.gd" id="1_bib4q"]
+[ext_resource type="Texture2D" uid="uid://b7pbudt6k4c3r" path="res://assets/placeholders/icon.svg" id="1_udafj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_17mm5"]
+size = Vector2(1029, 992)
+
+[node name="Box" type="RigidBody2D"]
+collision_layer = 32
+collision_mask = 51
+mass = 10.0
+script = ExtResource("1_bib4q")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.50002, -6.50002)
+scale = Vector2(7.97656, 7.74219)
+texture = ExtResource("1_udafj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -8)
+shape = SubResource("RectangleShape2D_17mm5")
+
+[node name="LeftCollisionRay" type="RayCast2D" parent="."]
+position = Vector2(-4, -75)
+target_position = Vector2(-318, 0)
+collision_mask = 2
+
+[node name="RightCollisionRay" type="RayCast2D" parent="."]
+position = Vector2(-1, -77)
+target_position = Vector2(312, -1)
+collision_mask = 2

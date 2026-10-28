@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2tod5ui3twg3"]
+
+[ext_resource type="Script" path="res://scripts/vanishing_platform.gd" id="1_5ooaj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_phuh0"]
+size = Vector2(129.125, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_77d4s"]
+size = Vector2(1018, 85)
+
+[node name="VanishingPlatform" type="StaticBody2D"]
+collision_mask = 0
+script = ExtResource("1_5ooaj")
+
+[node name="Icon" type="Sprite2D" parent="."]
+scale = Vector2(8, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="Icon"]
+scale = Vector2(0.125, 1)
+color = Color(0.180392, 0.243137, 0.282353, 1)
+polygon = PackedVector2Array(-464, -58, -451, -24, -431, -61, -191, -60, -171, -42, -182, -24, -155, -35, -161, -62, 133, -63, 117, -48, 153, -36, 174, -61, 440, -60, 434, -40, 476, -45, 459, -61, 509, -61, 509, 39, 485, 58, 387, 25, 450, 60, 92, 61, 135, 29, 91, -11, 117, 27, 57, 59, -226, 59, -201, 50, -242, 36, -246, 59, -384, 61, -348, 35, -373, 33, -407, 61, -524, 58, -505, 36, -521, 29, -521, -59)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-5.5, -1)
+scale = Vector2(8, 1)
+shape = SubResource("RectangleShape2D_phuh0")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-5, -32.5)
+shape = SubResource("RectangleShape2D_77d4s")
+
+[node name="DisappearTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="ReappearTimer" type="Timer" parent="."]
+wait_time = 7.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="DisappearTimer" to="." method="_on_disappear_timer_timeout"]
+[connection signal="timeout" from="ReappearTimer" to="." method="_on_reappear_timer_timeout"]

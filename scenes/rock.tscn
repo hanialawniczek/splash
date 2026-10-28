@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://erw4k411oqgq"]
+
+[ext_resource type="Script" path="res://scripts/rock.gd" id="1_eoft2"]
+[ext_resource type="Texture2D" uid="uid://48c7u5fkqhia" path="res://assets/placeholders/box.png" id="2_aast2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_12ybd"]
+size = Vector2(507, 506)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnlnx"]
+size = Vector2(723, 672)
+
+[node name="Rock" type="CharacterBody2D"]
+collision_layer = 32
+collision_mask = 17
+floor_snap_length = 80.0
+safe_margin = 0.15
+script = ExtResource("1_eoft2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.988281, 0.988281)
+texture = ExtResource("2_aast2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -2)
+shape = SubResource("RectangleShape2D_12ybd")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(8.5, -16)
+shape = SubResource("RectangleShape2D_rnlnx")
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

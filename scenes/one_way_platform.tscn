@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://chsaopo54wfi0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ytw5"]
+size = Vector2(4124, 191)
+
+[node name="OneWayPlatform" type="StaticBody2D"]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2052, 85.5)
+shape = SubResource("RectangleShape2D_6ytw5")
+one_way_collision = true
+
+[node name="Icon" type="Sprite2D" parent="."]
+position = Vector2(507.5, 87)
+scale = Vector2(8.16406, 1.4375)
+
+[node name="ColorRect2" type="ColorRect" parent="Icon"]
+offset_left = -63.0
+offset_top = -61.0
+offset_right = 442.0
+offset_bottom = 67.0
+color = Color(0.544297, 0.65189, 0.720183, 1)
+
+[node name="ColorRect" type="ColorRect" parent="Icon"]
+offset_left = -63.0
+offset_top = -61.0
+offset_right = 442.0
+offset_bottom = -16.0
+color = Color(0.180392, 0.243137, 0.282353, 1)

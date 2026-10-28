@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy5hon642wvek"]
+
+[ext_resource type="Script" path="res://scripts/rope_piece.gd" id="1_eotwu"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_u1spr"]
+radius = 30.0
+height = 140.0
+
+[node name="RopePiece" type="RigidBody2D"]
+collision_layer = 8
+mass = 0.8
+gravity_scale = 0.6
+linear_velocity = Vector2(5, 5)
+linear_damp = 3.0
+angular_damp = 1.0
+script = ExtResource("1_eotwu")
+
+[node name="C" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_u1spr")
+
+[node name="J" type="PinJoint2D" parent="."]
+position = Vector2(0, 70)
+node_a = NodePath("..")
+softness = 0.1

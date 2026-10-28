@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://408vpr37wf1a"]
+
+[ext_resource type="Script" path="res://scripts/rope_with_horizontal_platform.gd" id="1_iuyk7"]
+
+[node name="RopeWithHorizontalPlatform" type="Node2D"]
+script = ExtResource("1_iuyk7")

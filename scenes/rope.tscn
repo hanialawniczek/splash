@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bj12k8kshcjtk"]
+
+[ext_resource type="Script" path="res://scripts/rope.gd" id="1_ckxyp"]
+[ext_resource type="Texture2D" uid="uid://cstq8xno0pmib" path="res://assets/placeholders/rope1.png" id="2_qsrjy"]
+
+[node name="Rope" type="Node2D"]
+script = ExtResource("1_ckxyp")
+
+[node name="Line2D" type="Line2D" parent="."]
+texture_repeat = 2
+width = 80.0
+texture = ExtResource("2_qsrjy")
+texture_mode = 1
+end_cap_mode = 2

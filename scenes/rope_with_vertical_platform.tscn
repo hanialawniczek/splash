@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbovo2s76xtno"]
+
+[ext_resource type="Script" path="res://scripts/rope_with_vertical_platform.gd" id="1_4som1"]
+
+[node name="RopeWithVerticalPlatform" type="Node2D"]
+script = ExtResource("1_4som1")
+rope_length = 10

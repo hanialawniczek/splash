@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmaijxiq80fnn"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_rrwff"]
+[ext_resource type="Texture2D" uid="uid://b7pbudt6k4c3r" path="res://assets/placeholders/icon.svg" id="2_m7wwb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8kxop"]
+radius = 235.002
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i4gfn"]
+radius = 275.029
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b6u2v"]
+radius = 247.0
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(1, 0)
+collision_layer = 2
+collision_mask = 53
+floor_snap_length = 80.0
+safe_margin = 0.15
+script = ExtResource("1_rrwff")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_m7wwb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_8kxop")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.2, 0.2)
+process_callback = 0
+position_smoothing_enabled = true
+position_smoothing_speed = 3.0
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="DashAgainTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RopeDetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RopeDetectionArea"]
+shape = SubResource("CircleShape2D_i4gfn")
+
+[node name="CoyoteJumpTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="CoyoteWallJumpTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="WallJumpAgainTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 48
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+rotation = 1.5708
+shape = SubResource("CircleShape2D_b6u2v")
+
+[node name="LeftCollisionRay" type="RayCast2D" parent="."]
+target_position = Vector2(-270, 0)
+collision_mask = 32
+
+[node name="RightCollisionRay" type="RayCast2D" parent="."]
+target_position = Vector2(270, 0)
+collision_mask = 32
+
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DashAgainTimer" to="." method="_on_dash_angain_timer_timeout"]
+[connection signal="body_entered" from="RopeDetectionArea" to="." method="_on_rope_detection_area_body_entered"]
+[connection signal="body_exited" from="RopeDetectionArea" to="." method="_on_rope_detection_area_body_exited"]
+[connection signal="timeout" from="WallJumpAgainTimer" to="." method="_on_wall_jump_again_timer_timeout"]
+[connection signal="area_entered" from="DetectionArea" to="." method="_on_detection_area_area_entered"]
+[connection signal="area_exited" from="DetectionArea" to="." method="_on_detection_area_area_exited"]
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]

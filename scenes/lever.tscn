@@ -1,0 +1,83 @@
+[gd_scene load_steps=8 format=3 uid="uid://c71w65i2nkod7"]
+
+[ext_resource type="Script" path="res://scripts/lever.gd" id="1_wmwke"]
+[ext_resource type="Script" path="res://scripts/lever_control.gd" id="1_ykfte"]
+[ext_resource type="Script" path="res://scripts/lever_detection_area.gd" id="3_884gg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_go1qa"]
+size = Vector2(3442, 22.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pyb5e"]
+size = Vector2(3635, 186)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fy8rb"]
+size = Vector2(3559, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rkm8q"]
+
+[node name="Lever" type="Node2D"]
+script = ExtResource("1_ykfte")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("1_wmwke")
+
+[node name="LeverDetectionArea" type="Area2D" parent="RigidBody2D"]
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("3_884gg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/LeverDetectionArea"]
+position = Vector2(5, -37.25)
+shape = SubResource("RectangleShape2D_go1qa")
+
+[node name="PlayerLeaving" type="Area2D" parent="RigidBody2D"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D/PlayerLeaving"]
+position = Vector2(0, -83)
+shape = SubResource("RectangleShape2D_pyb5e")
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+position = Vector2(3.00006, -2)
+scale = Vector2(20.375, 0.460938)
+
+[node name="ColorRect" type="ColorRect" parent="RigidBody2D/Sprite2D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -87.0
+offset_top = -95.0
+offset_right = 86.0
+offset_bottom = 73.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.180392, 0.243137, 0.282353, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="RigidBody2D/Sprite2D"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_top = -41.0
+offset_bottom = 42.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.544297, 0.65189, 0.720183, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_fy8rb")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="RigidBody2D"]
+node_a = NodePath("..")
+node_b = NodePath("../../StaticBody2D")
+softness = 1.0
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_rkm8q")
